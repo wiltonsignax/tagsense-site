@@ -8,7 +8,7 @@ import { PageHero } from '../components/PageHero'
 
 export function BenefitsPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.benefits
-  const personas=locale==='pt'?[
+  const personas: Array<[string, string[]]> = locale==='pt'?[
     ['Diretor de Logística',['Redução de risco e perdas','KPIs e rastreabilidade','Visão consolidada da operação']],
     ['Gerente de CD',['Visibilidade em tempo real','Produtividade e gestão por exceções','Menos conferência manual']],
     ['TI',['Integração com sistemas existentes','Arquitetura agnóstica','Edge + Cloud com responsabilidades separadas']],
