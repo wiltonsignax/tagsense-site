@@ -1,0 +1,20 @@
+import { useLocation } from 'react-router-dom'
+import { type Locale } from '../content/site'
+import { getCopy } from '../lib/i18n'
+import { SEO } from '../components/SEO'
+import { PageHero } from '../components/PageHero'
+
+export function ImplementationPage({locale}:{locale:Locale}) {
+  const c=getCopy(locale); const location=useLocation()
+  const title=locale==='pt'?'Estratégia de implantação e expansão':locale==='en'?'Deployment and expansion strategy':'Estrategia de implementación y expansión'
+  const subtitle=locale==='pt'?'Entrar pela dor da expedição, provar valor e evoluir para uma plataforma completa.':locale==='en'?'Enter through the shipping pain point, prove value and evolve into a complete platform.':'Entrar por el dolor de expedición, demostrar valor y evolucionar hacia una plataforma completa.'
+  const poc=locale==='pt'?['Diagnóstico da operação','Levantamento RF','Integração simples','Instalação','Operação assistida','Métricas antes/depois']:locale==='en'?['Operational diagnosis','RF survey','Simple integration','Installation','Assisted operation','Before/after metrics']:['Diagnóstico de la operación','Levantamiento RF','Integración simple','Instalación','Operación asistida','Métricas antes/después']
+  const kpis=locale==='pt'?['Erros de expedição','Tempo de conferência','Retrabalho','Devoluções','Produtividade']:locale==='en'?['Shipping errors','Verification time','Rework','Returns','Productivity']:['Errores de expedición','Tiempo de conferencia','Retrabajo','Devoluciones','Productividad']
+  return <>
+    <SEO locale={locale} title={`${title} | TagSense`} description={subtitle} path={location.pathname}/>
+    <PageHero eyebrow="LAND & EXPAND" title={title} subtitle={subtitle} image="/media/strategy_detail_bg.png"/>
+    <section className="section"><div className="container"><div className="grid grid-3">{c.implementation.phases.map((p:[string,string,string])=><div className="card" key={p[0]}><div className="icon-box">{p[0]}</div><h3>{p[1]}</h3><p>{p[2]}</p></div>)}</div></div></section>
+    <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">POC</div><h2>{locale==='pt'?'Piloto em uma doca.':locale==='en'?'Single-dock pilot.':'Piloto en un muelle.'}</h2></div><p>{locale==='pt'?'Um escopo controlado para validar RF, integração e ganho operacional antes de escalar.':locale==='en'?'A controlled scope to validate RF, integration and operational value before scaling.':'Un alcance controlado para validar RF, integración y valor operativo antes de escalar.'}</p></div><div className="grid grid-3">{poc.map((x,i)=><div className="card" key={x}><div className="icon-box">{i+1}</div><h3>{x}</h3></div>)}</div></div></section>
+    <section className="section"><div className="container"><div className="surface cta-panel"><div className="eyebrow" style={{justifyContent:'center'}}>KPIs</div><h2>{locale==='pt'?'Medir antes e depois.':locale==='en'?'Measure before and after.':'Medir antes y después.'}</h2><div className="data-chips" style={{justifyContent:'center'}}>{kpis.map(x=><span className="data-chip" key={x}>{x}</span>)}</div></div></div></section>
+  </>
+}

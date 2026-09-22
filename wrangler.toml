@@ -1,0 +1,9 @@
+name = "tagsense-site"
+compatibility_date = "2026-09-22"
+pages_build_output_dir = "./dist"
+
+# Configure these as Cloudflare Pages environment variables / secrets:
+# VITE_TURNSTILE_SITE_KEY  (build-time environment variable)
+# TURNSTILE_SECRET_KEY     (secret used by Pages Function)
+# SUPABASE_URL             (secret / environment variable)
+# SUPABASE_SERVICE_ROLE_KEY (secret)

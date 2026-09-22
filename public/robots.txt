@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tagsense.com.br/sitemap.xml
