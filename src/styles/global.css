@@ -1038,3 +1038,48 @@ h3 { font-size: 1.18rem; }
     height: 38px;
   }
 }
+
+
+/* ===== V3.3 logo fit correction ===== */
+.header .brand,
+.header.scrolled .brand {
+  width: 214px;
+  height: 60px;
+  flex: 0 0 214px;
+}
+.brand-crop {
+  width: 214px;
+  height: 60px;
+}
+.brand-crop img {
+  width: 215px !important;
+  height: 215px !important;
+  left: -6px !important;
+  top: -77px !important;
+}
+.footer-brand {
+  width: 232px;
+  height: 76px;
+}
+.footer-brand img {
+  width: 245px !important;
+  height: 245px !important;
+  left: -7px !important;
+  top: -88px !important;
+}
+
+@media(max-width:760px) {
+  .header .brand,
+  .header.scrolled .brand,
+  .brand-crop {
+    width: 170px;
+    height: 50px;
+    flex-basis: 170px;
+  }
+  .brand-crop img {
+    width: 180px !important;
+    height: 180px !important;
+    left: -5px !important;
+    top: -65px !important;
+  }
+}
