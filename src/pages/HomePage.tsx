@@ -1,9 +1,9 @@
-import { Activity, ArrowRight, Bot, Boxes, DatabaseZap, RadioTower, ScanLine, ShieldCheck, Truck } from 'lucide-react'
+import { ArrowRight, Boxes, RadioTower } from 'lucide-react'
 import { Link, useLocation } from 'react-router-dom'
 import { type Locale } from '../content/site'
-import { getCopy, modulePath, pathFor } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { FeatureBanner } from '../components/FeatureBanner'
+import { HeroCarousel } from '../components/HeroCarousel'
 import { Flow } from '../components/Flow'
 import { Architecture } from '../components/Architecture'
 
@@ -15,8 +15,6 @@ export function HomePage({locale}:{locale:Locale}) {
     proofKicker: locale==='pt'?'A CAMADA DE VERDADE FÍSICA':locale==='en'?'THE PHYSICAL TRUTH LAYER':'LA CAPA DE VERDAD FÍSICA',
     proofTitle: locale==='pt'?'O software sabe o que deveria acontecer. A TagSense sabe o que aconteceu.':locale==='en'?'Software knows what should happen. TagSense knows what happened.':'El software sabe lo que debería ocurrir. TagSense sabe lo que ocurrió.',
     proofBody: locale==='pt'?'Entre o WMS e o chão da operação existe um mundo físico cheio de exceções. A TagSense conecta esse mundo aos sistemas, em tempo real.':locale==='en'?'Between the WMS and the warehouse floor there is a physical world full of exceptions. TagSense connects that world to your systems in real time.':'Entre el WMS y el piso de operación existe un mundo físico lleno de excepciones. TagSense conecta ese mundo con sus sistemas en tiempo real.',
-    story: locale==='pt'?'UMA PLATAFORMA. TRÊS MOMENTOS CRÍTICOS.':locale==='en'?'ONE PLATFORM. THREE CRITICAL MOMENTS.':'UNA PLATAFORMA. TRES MOMENTOS CRÍTICOS.',
-    storyTitle: locale==='pt'?'Enxergue o que acontece onde os erros custam mais caro.':locale==='en'?'See what happens where errors cost the most.':'Vea lo que ocurre donde los errores cuestan más.',
     platform: locale==='pt'?'PLATAFORMA TAGSENSE':locale==='en'?'TAGSENSE PLATFORM':'PLATAFORMA TAGSENSE',
     platformTitle: locale==='pt'?'Não vendemos leitura RFID. Entregamos decisão operacional.':locale==='en'?'We do not sell RFID reads. We deliver operational decisions.':'No vendemos lecturas RFID. Entregamos decisiones operativas.',
     platformBody: locale==='pt'?'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect e Analytics compartilham o mesmo núcleo de eventos, regras e rastreabilidade.':locale==='en'?'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect and Analytics share the same event, rules and traceability core.':'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect y Analytics comparten el mismo núcleo de eventos, reglas y trazabilidad.',
@@ -29,36 +27,7 @@ export function HomePage({locale}:{locale:Locale}) {
   return <>
     <SEO locale={locale} title={c.meta.title} description={c.meta.description} path={location.pathname}/>
 
-    <section className="masthead">
-      <div className="masthead-media"><img src="/media/cover_detail_bg.png" alt="Operação logística com RFID"/></div>
-      <div className="masthead-overlay"/>
-      <div className="container masthead-grid">
-        <div className="masthead-copy">
-          <div className="eyebrow">{c.hero.kicker}</div>
-          <h1>{c.hero.title}</h1>
-          <p>{c.hero.subtitle}</p>
-          <div className="hero-actions">
-            <Link className="btn btn-primary" to={pathFor(locale,'contact')}>{c.hero.primary}<ArrowRight size={18}/></Link>
-            <Link className="btn btn-glass" to={pathFor(locale,'platform')}>{c.hero.secondary}</Link>
-          </div>
-        </div>
-        <div className="masthead-rail">
-          <div className="rail-kicker">TAGSENSE / 01</div>
-          <div className="rail-line"/>
-          <div className="rail-metric"><span>RFID</span><strong>{locale==='pt'?'Visibilidade física':locale==='en'?'Physical visibility':'Visibilidad física'}</strong></div>
-          <div className="rail-metric"><span>EDGE</span><strong>{locale==='pt'?'Resposta local':locale==='en'?'Local response':'Respuesta local'}</strong></div>
-          <div className="rail-metric"><span>CLOUD</span><strong>{locale==='pt'?'Gestão central':locale==='en'?'Central management':'Gestión central'}</strong></div>
-        </div>
-      </div>
-      <div className="masthead-bottom">
-        <div className="container masthead-bottom-grid">
-          <div><Activity/><span>Event Engine</span></div>
-          <div><DatabaseZap/><span>WMS / ERP / TMS</span></div>
-          <div><ShieldCheck/><span>{locale==='pt'?'Trilha auditável':locale==='en'?'Auditable trail':'Trazabilidad auditable'}</span></div>
-          <div><Truck/><span>{locale==='pt'?'Operação real':locale==='en'?'Real operation':'Operación real'}</span></div>
-        </div>
-      </div>
-    </section>
+    <HeroCarousel locale={locale}/>
 
     <section className="editorial-proof">
       <div className="container editorial-proof-grid">
@@ -84,47 +53,6 @@ export function HomePage({locale}:{locale:Locale}) {
         </div>
       </div>
     </section>
-
-    <section className="story-intro">
-      <div className="container">
-        <div className="eyebrow">{t.story}</div>
-        <h2>{t.storyTitle}</h2>
-      </div>
-    </section>
-
-    <FeatureBanner
-      eyebrow="TAGSENSE DOCK"
-      title={locale==='pt'?'A doca deixa de ser ponto cego.':locale==='en'?'The dock stops being a blind spot.':'El muelle deja de ser un punto ciego.'}
-      body={locale==='pt'?'A carga, a doca e o veículo passam a ser uma única decisão operacional. Volumes incorretos são identificados antes de o caminhão sair.':locale==='en'?'Load, dock and vehicle become one operational decision. Wrong packages are detected before the truck leaves.':'La carga, el muelle y el vehículo se convierten en una sola decisión operativa. Los volúmenes incorrectos se detectan antes de la salida.'}
-      image="/media/cover_detail_bg.png"
-      href={modulePath(locale,'dock')}
-      cta={locale==='pt'?'Explorar Dock':locale==='en'?'Explore Dock':'Explorar Dock'}
-      icon={RadioTower}
-      meta={[locale==='pt'?'Tempo real':locale==='en'?'Real time':'Tiempo real', locale==='pt'?'Alertas':locale==='en'?'Alerts':'Alertas', locale==='pt'?'Auditoria':locale==='en'?'Audit':'Auditoría']}
-    />
-
-    <FeatureBanner
-      eyebrow="TAGSENSE TUNNEL"
-      title={locale==='pt'?'Centenas de leituras. Uma única resposta: está certo ou não.':locale==='en'?'Hundreds of reads. One answer: correct or not.':'Cientos de lecturas. Una sola respuesta: correcto o no.'}
-      body={locale==='pt'?'O túnel confere SKU e quantidade de produtos fracionados em segundos, reduzindo dependência de conferência manual.':locale==='en'?'The tunnel verifies SKU and quantity for split orders in seconds, reducing manual verification.':'El túnel verifica SKU y cantidad de pedidos fraccionados en segundos, reduciendo la verificación manual.'}
-      image="/media/platform_detail_bg.png"
-      href={modulePath(locale,'tunnel')}
-      cta={locale==='pt'?'Explorar Tunnel':locale==='en'?'Explore Tunnel':'Explorar Tunnel'}
-      icon={ScanLine}
-      reverse
-      meta={['SKU', locale==='pt'?'Quantidade':locale==='en'?'Quantity':'Cantidad', locale==='pt'?'Bloqueio por exceção':locale==='en'?'Exception blocking':'Bloqueo por excepción']}
-    />
-
-    <FeatureBanner
-      eyebrow="TAGSENSE INVENTORY + DRONE"
-      title={locale==='pt'?'O estoque físico ganha frequência, contexto e autonomia.':locale==='en'?'Physical inventory gains frequency, context and autonomy.':'El inventario físico gana frecuencia, contexto y autonomía.'}
-      body={locale==='pt'?'Coletores, leitores fixos e, no roadmap, drones RFID permitem confrontar o estoque real com o WMS com muito mais frequência.':locale==='en'?'Handhelds, fixed readers and, on the roadmap, RFID drones enable much more frequent reconciliation of physical stock with WMS.':'Colectores, lectores fijos y, en el roadmap, drones RFID permiten conciliar el inventario físico con el WMS con mucha más frecuencia.'}
-      image="/media/benefits_detail_bg.png"
-      href={modulePath(locale,'inventory')}
-      cta={locale==='pt'?'Explorar Inventory':locale==='en'?'Explore Inventory':'Explorar Inventory'}
-      icon={Bot}
-      meta={[locale==='pt'?'Inventário cíclico':locale==='en'?'Cycle counting':'Inventario cíclico', 'RFID', locale==='pt'?'Roadmap Drone':locale==='en'?'Drone roadmap':'Roadmap Drone']}
-    />
 
     <section className="platform-manifesto">
       <div className="container platform-manifesto-grid">
