@@ -3,7 +3,8 @@ import { Blocks, Cloud, Cpu, Fingerprint, GitBranch, RadioTower, ShieldCheck, Wa
 import { type Locale } from '../content/site'
 import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'
+import { PageHero } from '../components/PageHero'
+import { FeatureBanner } from '../components/FeatureBanner'
 
 export function TechnologyPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.technology
