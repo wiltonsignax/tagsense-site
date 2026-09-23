@@ -1199,3 +1199,63 @@ h3 { font-size: 1.18rem; }
     top: -57px !important;
   }
 }
+
+
+/* ===== V3.6 dedicated logo asset: no crop, no offsets ===== */
+.header .brand,
+.header.scrolled .brand {
+  width: 190px !important;
+  height: 68px !important;
+  flex: 0 0 190px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: flex-start !important;
+  overflow: visible !important;
+}
+
+.header .brand-logo,
+.header.scrolled .brand-logo {
+  display: block !important;
+  position: static !important;
+  height: 62px !important;
+  width: auto !important;
+  max-width: 100% !important;
+  max-height: 62px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  transform: none !important;
+  margin: 0 !important;
+}
+
+.footer .footer-logo {
+  display: block !important;
+  position: static !important;
+  height: 68px !important;
+  width: auto !important;
+  max-width: 220px !important;
+  max-height: 68px !important;
+  object-fit: contain !important;
+  object-position: left center !important;
+  transform: none !important;
+  margin: 0 0 18px !important;
+}
+
+@media(max-width:760px) {
+  .header .brand,
+  .header.scrolled .brand {
+    width: 148px !important;
+    height: 54px !important;
+    flex-basis: 148px !important;
+  }
+
+  .header .brand-logo,
+  .header.scrolled .brand-logo {
+    height: 48px !important;
+    max-height: 48px !important;
+  }
+
+  .footer .footer-logo {
+    height: 58px !important;
+    max-height: 58px !important;
+  }
+}
