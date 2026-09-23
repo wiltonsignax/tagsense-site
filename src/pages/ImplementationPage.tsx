@@ -1,8 +1,8 @@
 import { useLocation } from 'react-router-dom'
 import { type Locale } from '../content/site'
-import { getCopy } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'
+import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'\nimport { RadioTower } from 'lucide-react'
 
 export function ImplementationPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation()
@@ -14,7 +14,7 @@ export function ImplementationPage({locale}:{locale:Locale}) {
     <SEO locale={locale} title={`${title} | TagSense`} description={subtitle} path={location.pathname}/>
     <PageHero eyebrow="LAND & EXPAND" title={title} subtitle={subtitle} image="/media/strategy_detail_bg.png"/>
     <section className="section"><div className="container"><div className="grid grid-3">{c.implementation.phases.map((p:[string,string,string])=><div className="card" key={p[0]}><div className="icon-box">{p[0]}</div><h3>{p[1]}</h3><p>{p[2]}</p></div>)}</div></div></section>
-    <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">POC</div><h2>{locale==='pt'?'Piloto em uma doca.':locale==='en'?'Single-dock pilot.':'Piloto en un muelle.'}</h2></div><p>{locale==='pt'?'Um escopo controlado para validar RF, integração e ganho operacional antes de escalar.':locale==='en'?'A controlled scope to validate RF, integration and operational value before scaling.':'Un alcance controlado para validar RF, integración y valor operativo antes de escalar.'}</p></div><div className="grid grid-3">{poc.map((x,i)=><div className="card" key={x}><div className="icon-box">{i+1}</div><h3>{x}</h3></div>)}</div></div></section>
+    <FeatureBanner eyebrow="POC · 1 DOCA" title={locale==='pt'?'Prove antes de escalar.':locale==='en'?'Prove before you scale.':'Demuestre antes de escalar.'} body={locale==='pt'?'A implantação começa pequena de propósito: uma doca, uma dor, indicadores definidos e evidência suficiente para decidir a expansão.':locale==='en'?'Deployment starts small on purpose: one dock, one pain point, defined indicators and enough evidence to decide the expansion.':'La implementación comienza pequeña a propósito: un muelle, un dolor, indicadores definidos y evidencia suficiente para decidir la expansión.'} image="/media/strategy_detail_bg.png" href={pathFor(locale,'contact')} cta={locale==='pt'?'Estruturar uma POC':locale==='en'?'Structure a POC':'Estructurar una POC'} icon={RadioTower} meta={['RF Survey','Integration','Before/After']}/>\n    <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">POC</div><h2>{locale==='pt'?'Piloto em uma doca.':locale==='en'?'Single-dock pilot.':'Piloto en un muelle.'}</h2></div><p>{locale==='pt'?'Um escopo controlado para validar RF, integração e ganho operacional antes de escalar.':locale==='en'?'A controlled scope to validate RF, integration and operational value before scaling.':'Un alcance controlado para validar RF, integración y valor operativo antes de escalar.'}</p></div><div className="grid grid-3">{poc.map((x,i)=><div className="card" key={x}><div className="icon-box">{i+1}</div><h3>{x}</h3></div>)}</div></div></section>
     <section className="section"><div className="container"><div className="surface cta-panel"><div className="eyebrow" style={{justifyContent:'center'}}>KPIs</div><h2>{locale==='pt'?'Medir antes e depois.':locale==='en'?'Measure before and after.':'Medir antes y después.'}</h2><div className="data-chips" style={{justifyContent:'center'}}>{kpis.map(x=><span className="data-chip" key={x}>{x}</span>)}</div></div></div></section>
   </>
 }
