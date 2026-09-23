@@ -1,9 +1,9 @@
 import { useLocation } from 'react-router-dom'
-import { CheckCircle2, RadioTower, Database, MapPin, Clock, PackageSearch } from 'lucide-react'
+import { CheckCircle2, RadioTower, Database, MapPin, Clock, PackageSearch, ArrowRight } from 'lucide-react'
 import { type Locale, type ModuleKey } from '../content/site'
-import { getCopy } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'
+import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'
 
 const visualByModule: Record<ModuleKey,string> = {
   receive:'/media/flow_detail_bg.png', inventory:'/media/benefits_detail_bg.png', drone:'/media/platform_detail_bg.png', tunnel:'/media/platform_detail_bg.png', dock:'/media/cover_detail_bg.png', load:'/media/strategy_detail_bg.png', connect:'/media/arch_detail_bg.png', analytics:'/media/benefits_detail_bg.png'
@@ -19,6 +19,17 @@ export function ModulePage({locale,module}:{locale:Locale;module:ModuleKey}) {
       <div className="surface highlight-card"><div className="eyebrow">{locale==='pt'?'LACUNA QUE FECHA':locale==='en'?'GAP ADDRESSED':'BRECHA QUE RESUELVE'}</div><h2>{m.gap}</h2><p>{module==='dock'?(locale==='pt'?'O Dock é o primeiro produto comercial da TagSense e foi desenhado para provar valor rapidamente na expedição.':locale==='en'?'Dock is TagSense’s first commercial product, designed to prove value quickly at shipping.':'Dock es el primer producto comercial de TagSense y fue diseñado para demostrar valor rápidamente en expedición.'):(locale==='pt'?'O módulo se conecta ao fluxo físico e aos sistemas de gestão para transformar RFID em uma ação operacional.':locale==='en'?'The module connects physical flow with management systems to turn RFID into operational action.':'El módulo conecta el flujo físico con los sistemas de gestión para transformar RFID en una acción operativa.')}</p>{m.roadmap&&<div className="notice">{m.roadmap}</div>}</div>
       <div className="surface highlight-card"><div className="eyebrow">{locale==='pt'?'CAPACIDADES':locale==='en'?'CAPABILITIES':'CAPACIDADES'}</div><ul className="check-list">{m.capabilities.map((x:string)=><li key={x}><CheckCircle2/>{x}</li>)}</ul></div>
     </div></section>
+    <FeatureBanner
+      eyebrow={`TAGSENSE ${m.name.toUpperCase()}`}
+      title={locale==='pt'?'Da leitura ao evento. Do evento à decisão.':locale==='en'?'From read to event. From event to decision.':'De la lectura al evento. Del evento a la decisión.'}
+      body={locale==='pt'?'A TagSense não trata RFID como uma lista de EPCs. Cada sinal é interpretado dentro do processo, da carga e do local para gerar uma ação operacional confiável.':locale==='en'?'TagSense does not treat RFID as a list of EPCs. Every signal is interpreted within process, load and location context to generate a trusted operational action.':'TagSense no trata RFID como una lista de EPCs. Cada señal se interpreta dentro del proceso, la carga y la ubicación para generar una acción operativa confiable.'}
+      image={visualByModule[module]}
+      href={pathFor(locale,'contact')}
+      cta={locale==='pt'?'Agendar uma demonstração':locale==='en'?'Book a demo':'Agendar una demo'}
+      icon={RadioTower}
+      meta={['RFID','Edge','Event Engine']}
+      reverse={module==='tunnel'||module==='inventory'||module==='connect'}
+    />
     <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">{locale==='pt'?'EVENTOS E DADOS':locale==='en'?'EVENTS & DATA':'EVENTOS Y DATOS'}</div><h2>{locale==='pt'?'Cada leitura vira contexto operacional.':locale==='en'?'Every read becomes operational context.':'Cada lectura se convierte en contexto operativo.'}</h2></div><p>{locale==='pt'?'O objetivo não é apenas ler tags. É saber quando, onde, em qual processo e com qual carga o evento aconteceu.':locale==='en'?'The goal is not just to read tags. It is to know when, where, in which process and with which load the event happened.':'El objetivo no es solo leer tags. Es saber cuándo, dónde, en qué proceso y con qué carga ocurrió el evento.'}</p></div><div className="data-chips">{data.map(x=><span className="data-chip" key={x}>{x}</span>)}</div></div></section>
     {module==='dock' && <DockExample locale={locale}/>} 
     {module==='tunnel' && <TunnelExample locale={locale}/>} 
