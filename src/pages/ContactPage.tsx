@@ -1,6 +1,6 @@
 import { FormEvent, useCallback, useMemo, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { Building2, Mail, RadioTower } from 'lucide-react'
+import { RadioTower } from 'lucide-react'
 import { type Locale } from '../content/site'
 import { getCopy } from '../lib/i18n'
 import { getUtm } from '../lib/utm'
@@ -43,6 +43,14 @@ export function ContactPage({locale}:{locale:Locale}) {
         </div>
       </form>
     </div></section>
+    <section className="contact-next">
+      <div className="container contact-next-grid">
+        <div><span>01</span><strong>{locale==='pt'?'Entendemos a operação':locale==='en'?'We understand the operation':'Entendemos la operación'}</strong></div>
+        <div><span>02</span><strong>{locale==='pt'?'Definimos a dor e os KPIs':locale==='en'?'We define pain and KPIs':'Definimos dolor y KPIs'}</strong></div>
+        <div><span>03</span><strong>{locale==='pt'?'Desenhamos a POC':locale==='en'?'We design the POC':'Diseñamos la POC'}</strong></div>
+        <div><span>04</span><strong>{locale==='pt'?'Medimos antes de escalar':locale==='en'?'We measure before scaling':'Medimos antes de escalar'}</strong></div>
+      </div>
+    </section>
   </>
 }
 
