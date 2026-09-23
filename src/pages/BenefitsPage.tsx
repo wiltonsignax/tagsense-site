@@ -5,6 +5,7 @@ import { type Locale } from '../content/site'
 import { getCopy } from '../lib/i18n'
 import { SEO } from '../components/SEO'
 import { PageHero } from '../components/PageHero'
+import { FeatureBanner } from '../components/FeatureBanner'
 
 export function BenefitsPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.benefits
@@ -29,7 +30,7 @@ export function BenefitsPage({locale}:{locale:Locale}) {
     <SEO locale={locale} title={`${p.title} | TagSense`} description={p.subtitle} path={location.pathname}/>
     <PageHero eyebrow={c.nav.benefits.toUpperCase()} title={p.title} subtitle={p.subtitle} image="/media/benefits_detail_bg.png"/>
     <section className="section"><div className="container"><div className="grid grid-2">{personas.map((x,i)=>{const I=icons[i];return <div className="card persona" key={x[0]}><div className="icon-box"><I/></div><h3>{x[0]}</h3><ul className="check-list">{x[1].map(v=><li key={v}>• {v}</li>)}</ul></div>})}</div></div></section>
-    <RoiCalculator locale={locale}/>
+    <FeatureBanner eyebrow="OPERATIONAL IMPACT" title={locale==='pt'?'Menos exceção escondida. Mais decisão com evidência.':locale==='en'?'Fewer hidden exceptions. More evidence-based decisions.':'Menos excepciones ocultas. Más decisiones con evidencia.'} body={locale==='pt'?'A TagSense atua onde erro, retrabalho e baixa visibilidade viram custo. O objetivo é transformar esses pontos em indicadores mensuráveis.':locale==='en'?'TagSense acts where errors, rework and low visibility become cost. The goal is to turn those points into measurable indicators.':'TagSense actúa donde errores, retrabajo y baja visibilidad se convierten en costo. El objetivo es transformar esos puntos en indicadores medibles.'} image="/media/benefits_detail_bg.png" href="#roi" cta={locale==='pt'?'Simular exposição operacional':locale==='en'?'Estimate operational exposure':'Simular exposición operativa'} icon={BarChart3} meta={['Errors','Time','Rework','Traceability']}/><div id="roi"><RoiCalculator locale={locale}/></div>
   </>
 }
 

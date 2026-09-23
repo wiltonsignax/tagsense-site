@@ -11,6 +11,7 @@ export function Layout({ locale, children }: { locale: Locale; children: ReactNo
   const [scrolled, setScrolled] = useState(false)
   const [mobileOpen, setMobileOpen] = useState(false)
   const [solutionsOpen, setSolutionsOpen] = useState(false)
+  const [companyOpen, setCompanyOpen] = useState(false)
 
   useEffect(() => {
     const fn = () => setScrolled(window.scrollY > 20)
@@ -18,9 +19,15 @@ export function Layout({ locale, children }: { locale: Locale; children: ReactNo
     return () => window.removeEventListener('scroll', fn)
   }, [])
 
-  useEffect(() => setMobileOpen(false), [location.pathname])
+  useEffect(() => {
+    setMobileOpen(false)
+    setSolutionsOpen(false)
+    setCompanyOpen(false)
+  }, [location.pathname])
 
   const setLocale = (next: Locale) => navigate(switchLocalePath(location.pathname, next))
+  const implementationLabel = locale==='pt'?'Implantação':locale==='en'?'Deployment':'Implementación'
+  const aboutLabel = locale==='pt'?'Sobre a TagSense':locale==='en'?'About TagSense':'Sobre TagSense'
 
   return (
     <>
@@ -32,26 +39,45 @@ export function Layout({ locale, children }: { locale: Locale; children: ReactNo
 
           <nav className="nav-links" aria-label="Main navigation">
             <Link to={pathFor(locale, 'platform')}>{c.nav.platform}</Link>
-            <div className="nav-solutions" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)} style={{position:'relative'}}>
-              <button onClick={() => setSolutionsOpen(v => !v)} style={{background:'none',border:0,color:'inherit',display:'flex',alignItems:'center',gap:4,padding:0}}>
+
+            <div className="nav-solutions nav-popover" onMouseEnter={() => setSolutionsOpen(true)} onMouseLeave={() => setSolutionsOpen(false)}>
+              <button className="nav-popover-trigger" onClick={() => setSolutionsOpen(v => !v)}>
                 {c.nav.solutions} <ChevronDown size={14}/>
               </button>
               {solutionsOpen && (
-                <div style={{position:'absolute',top:'28px',left:'-20px',width:340,padding:12,borderRadius:18,background:'rgba(5,9,16,.98)',border:'1px solid rgba(255,255,255,.08)',boxShadow:'var(--shadow)'}}>
-                  {modules.map((m: ModuleKey) => (
-                    <Link key={m} to={modulePath(locale,m)} style={{display:'grid',gridTemplateColumns:'100px 1fr',gap:10,padding:'10px 11px',borderRadius:12}}>
-                      <strong style={{color:'#fff'}}>TagSense {c.modules[m].name}</strong>
-                      <span style={{color:'#7f8da3',fontSize:'.8rem'}}>{c.modules[m].short}</span>
-                    </Link>
-                  ))}
+                <div className="solutions-menu">
+                  <div className="solutions-menu-head">
+                    <span>{locale==='pt'?'MÓDULOS':locale==='en'?'MODULES':'MÓDULOS'}</span>
+                    <strong>{locale==='pt'?'Inteligência física de ponta a ponta':locale==='en'?'End-to-end physical intelligence':'Inteligencia física de punta a punta'}</strong>
+                  </div>
+                  <div className="solutions-menu-grid">
+                    {modules.map((m: ModuleKey) => (
+                      <Link key={m} to={modulePath(locale,m)} className="solutions-menu-item">
+                        <strong>TagSense <span className="accent">{c.modules[m].name}</span></strong>
+                        <span>{c.modules[m].short}</span>
+                      </Link>
+                    ))}
+                  </div>
                 </div>
               )}
             </div>
+
             <Link to={pathFor(locale, 'how')}>{c.nav.how}</Link>
             <Link to={pathFor(locale, 'technology')}>{c.nav.technology}</Link>
             <Link to={pathFor(locale, 'benefits')}>{c.nav.benefits}</Link>
-            <Link to={pathFor(locale, 'investors')}>{c.nav.investors}</Link>
-            <Link to={pathFor(locale, 'about')}>{c.nav.about}</Link>
+
+            <div className="nav-popover" onMouseEnter={() => setCompanyOpen(true)} onMouseLeave={() => setCompanyOpen(false)}>
+              <button className="nav-popover-trigger" onClick={() => setCompanyOpen(v => !v)}>
+                {c.nav.about} <ChevronDown size={14}/>
+              </button>
+              {companyOpen && (
+                <div className="company-menu">
+                  <Link to={pathFor(locale,'about')}><strong>{aboutLabel}</strong><span>{locale==='pt'?'Visão, propósito e posicionamento':locale==='en'?'Vision, purpose and positioning':'Visión, propósito y posicionamiento'}</span></Link>
+                  <Link to={pathFor(locale,'implementation')}><strong>{implementationLabel}</strong><span>{locale==='pt'?'POC, Land & Expand e KPIs':locale==='en'?'POC, Land & Expand and KPIs':'POC, Land & Expand y KPIs'}</span></Link>
+                  <Link to={pathFor(locale,'investors')}><strong>{c.nav.investors}</strong><span>{locale==='pt'?'Tese pública da TagSense':locale==='en'?'TagSense public thesis':'Tesis pública de TagSense'}</span></Link>
+                </div>
+              )}
+            </div>
           </nav>
 
           <div className="nav-actions">
@@ -66,12 +92,15 @@ export function Layout({ locale, children }: { locale: Locale; children: ReactNo
 
           <div className={`mobile-menu ${mobileOpen?'open':''}`}>
             <Link to={pathFor(locale, 'platform')}>{c.nav.platform}</Link>
+            <span className="mobile-menu-title">{c.nav.solutions}</span>
             {modules.map((m: ModuleKey) => <Link key={m} to={modulePath(locale,m)}>TagSense {c.modules[m].name}</Link>)}
+            <span className="mobile-menu-title">{c.nav.about}</span>
             <Link to={pathFor(locale, 'how')}>{c.nav.how}</Link>
             <Link to={pathFor(locale, 'technology')}>{c.nav.technology}</Link>
             <Link to={pathFor(locale, 'benefits')}>{c.nav.benefits}</Link>
+            <Link to={pathFor(locale, 'implementation')}>{implementationLabel}</Link>
+            <Link to={pathFor(locale, 'about')}>{aboutLabel}</Link>
             <Link to={pathFor(locale, 'investors')}>{c.nav.investors}</Link>
-            <Link to={pathFor(locale, 'about')}>{c.nav.about}</Link>
             <Link to={pathFor(locale, 'contact')}>{c.nav.demo}</Link>
           </div>
         </div>

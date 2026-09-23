@@ -1,9 +1,10 @@
 import { useLocation } from 'react-router-dom'
 import { Blocks, Cloud, Cpu, Fingerprint, GitBranch, RadioTower, ShieldCheck, Waypoints } from 'lucide-react'
 import { type Locale } from '../content/site'
-import { getCopy } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
 import { PageHero } from '../components/PageHero'
+import { FeatureBanner } from '../components/FeatureBanner'
 
 export function TechnologyPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.technology
@@ -25,5 +26,15 @@ export function TechnologyPage({locale}:{locale:Locale}) {
     <SEO locale={locale} title={`${p.title} | TagSense`} description={p.subtitle} path={location.pathname}/>
     <PageHero eyebrow={c.nav.technology.toUpperCase()} title={p.title} subtitle={p.subtitle} image="/media/arch_detail_bg.png"/>
     <section className="section"><div className="container"><div className="technology-orbit">{items.map((x,i)=>{const I=icons[i];return <div className="card" key={x[0]}><div className="icon-box"><I/></div><h3>{x[0]}</h3><p>{x[1]}</p></div>})}</div></div></section>
+    <FeatureBanner
+      eyebrow="TAGSENSE EVENT ENGINE"
+      title={locale==='pt'?'O diferencial está no que acontece entre o sinal e a decisão.':locale==='en'?'The differentiation lives between signal and decision.':'La diferencia está entre la señal y la decisión.'}
+      body={locale==='pt'?'Camadas de contexto, regras, sequência de antenas e estado da operação transformam leituras brutas em eventos físicos confiáveis.':locale==='en'?'Context layers, rules, antenna sequence and operational state turn raw reads into trusted physical events.':'Capas de contexto, reglas, secuencia de antenas y estado de operación convierten lecturas brutas en eventos físicos confiables.'}
+      image="/media/arch_detail_bg.png"
+      href={pathFor(locale,'contact')}
+      cta={locale==='pt'?'Ver em uma demonstração':locale==='en'?'See it in a demo':'Verlo en una demo'}
+      icon={Waypoints}
+      meta={['Context','Rules','Sequence','Audit']}
+    />
   </>
 }
