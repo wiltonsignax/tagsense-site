@@ -34,7 +34,7 @@ export function Layout({ locale, children }: { locale: Locale; children: ReactNo
       <header className={`header ${scrolled ? 'scrolled' : ''}`}>
         <div className="container nav">
           <Link className="brand" to={pathFor(locale, 'home')} aria-label="TagSense home">
-            <span className="footer-brand"><img src="/media/logo-tagsense-dark.png" alt="TagSense" /></span>
+            <img className="brand-logo" src="/media/tagsense-logo-header.webp" alt="TagSense" />
           </Link>
 
           <nav className="nav-links" aria-label="Main navigation">
@@ -117,7 +117,7 @@ function Footer({locale}:{locale:Locale}) {
     <footer className="footer">
       <div className="container footer-grid">
         <div>
-          <img src="/media/tagsense-logo-dark-tight.svg" alt="TagSense" />
+          <img className="footer-logo" src="/media/tagsense-logo-header.webp" alt="TagSense" />
           <p>{c.hero.subtitle}</p>
           <small>© {new Date().getFullYear()} TagSense.</small>
         </div>
