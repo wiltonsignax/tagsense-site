@@ -29,7 +29,8 @@ export function HomePage({locale}:{locale:Locale}) {
 
     <HeroCarousel locale={locale}/>
 
-    <div className="home-feed">\n    <section className="editorial-proof">
+    <div className="home-feed">
+    <section className="editorial-proof">
       <div className="container editorial-proof-grid">
         <div className="editorial-index">02</div>
         <div className="editorial-copy">
@@ -96,5 +97,6 @@ export function HomePage({locale}:{locale:Locale}) {
         </div>
       </div>
     </section>
+    </div>
   </>
 }
