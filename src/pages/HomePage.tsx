@@ -20,8 +20,8 @@ export function HomePage({locale}:{locale:Locale}) {
     platformBody: locale==='pt'?'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect e Analytics compartilham o mesmo núcleo de eventos, regras e rastreabilidade.':locale==='en'?'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect and Analytics share the same event, rules and traceability core.':'Receive, Inventory, Drone, Tunnel, Dock, Load, Connect y Analytics comparten el mismo núcleo de eventos, reglas y trazabilidad.',
     flowBody: locale==='pt'?'A identidade física nasce no recebimento e acompanha a mercadoria até a expedição.':locale==='en'?'Physical identity starts at receiving and follows goods all the way to shipping.':'La identidad física nace en recepción y acompaña la mercancía hasta expedición.',
     archBody: locale==='pt'?'Cloud para gestão. Edge para continuidade. RFID para capturar o mundo físico.':locale==='en'?'Cloud for management. Edge for continuity. RFID to capture the physical world.':'Cloud para gestión. Edge para continuidad. RFID para capturar el mundo físico.',
-    final: locale==='pt'?'Transforme sua doca no primeiro ponto de verdade da operação.':locale==='en'?'Turn your dock into the first point of truth in the operation.':'Convierta su muelle en el primer punto de verdad de la operación.',
-    finalBody: locale==='pt'?'Comece com uma POC controlada, prove valor com indicadores reais e expanda módulo por módulo.':locale==='en'?'Start with a controlled POC, prove value with real indicators and expand module by module.':'Empiece con una POC controlada, demuestre valor con indicadores reales y expanda módulo por módulo.'
+    final: locale==='pt'?'Veja a TagSense aplicada à sua operação.':locale==='en'?'See TagSense applied to your operation.':'Vea TagSense aplicada a su operación.',
+    finalBody: locale==='pt'?'Agende uma conversa, escolha o primeiro ponto de controle e desenhe uma POC com indicadores claros antes de expandir.':locale==='en'?'Book a conversation, choose the first control point and design a POC with clear indicators before expanding.':'Agende una conversación, elija el primer punto de control y diseñe una POC con indicadores claros antes de expandir.'
   }
 
   return <>
@@ -29,6 +29,7 @@ export function HomePage({locale}:{locale:Locale}) {
 
     <HeroCarousel locale={locale}/>
 
+    <div className="home-feed">
     <section className="editorial-proof">
       <div className="container editorial-proof-grid">
         <div className="editorial-index">02</div>
@@ -76,25 +77,26 @@ export function HomePage({locale}:{locale:Locale}) {
       </div>
     </section>
 
-    <section className="architecture-banner">
-      <div className="architecture-banner-media"><img src="/media/arch_detail_bg.png" alt="" aria-hidden="true"/></div>
-      <div className="architecture-banner-overlay"/>
-      <div className="container architecture-banner-content">
+    <section className="section alt home-architecture">
+      <div className="container">
         <div className="section-head"><div><div className="eyebrow">{c.architecture.eyebrow}</div><h2>{c.architecture.title}</h2></div><p>{t.archBody}</p></div>
-        <div className="architecture-glass"><Architecture locale={locale}/></div>
+        <div className="surface home-architecture-surface"><Architecture locale={locale}/></div>
       </div>
     </section>
 
-    <section className="final-banner">
-      <div className="container final-banner-grid">
-        <div className="final-banner-mark"><Boxes size={56}/></div>
-        <div>
-          <div className="eyebrow">{locale==='pt'?'COMECE PELA DOR MAIS MENSURÁVEL':locale==='en'?'START WITH THE MOST MEASURABLE PAIN':'EMPIECE POR EL DOLOR MÁS MEDIBLE'}</div>
-          <h2>{t.final}</h2>
-          <p>{t.finalBody}</p>
+    <section className="section compact home-final-cta">
+      <div className="container">
+        <div className="surface home-final-cta-card">
+          <div className="home-final-cta-icon"><Boxes size={34}/></div>
+          <div>
+            <div className="eyebrow">{locale==='pt'?'PRÓXIMO PASSO':locale==='en'?'NEXT STEP':'PRÓXIMO PASO'}</div>
+            <h2>{t.final}</h2>
+            <p>{t.finalBody}</p>
+          </div>
+          <div><Link className="btn btn-primary" to={pathFor(locale,'contact')}>{c.nav.demo}<ArrowRight size={18}/></Link></div>
         </div>
-        <div className="final-banner-action"><Link className="btn btn-primary" to={pathFor(locale,'contact')}>{c.nav.demo}<ArrowRight size={18}/></Link></div>
       </div>
     </section>
+    </div>
   </>
 }
