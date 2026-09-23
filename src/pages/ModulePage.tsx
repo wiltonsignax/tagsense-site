@@ -3,7 +3,8 @@ import { CheckCircle2, RadioTower, Database, MapPin, Clock, PackageSearch, Arrow
 import { type Locale, type ModuleKey } from '../content/site'
 import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'
+import { PageHero } from '../components/PageHero'
+import { FeatureBanner } from '../components/FeatureBanner'
 
 const visualByModule: Record<ModuleKey,string> = {
   receive:'/media/flow_detail_bg.png', inventory:'/media/benefits_detail_bg.png', drone:'/media/platform_detail_bg.png', tunnel:'/media/platform_detail_bg.png', dock:'/media/cover_detail_bg.png', load:'/media/strategy_detail_bg.png', connect:'/media/arch_detail_bg.png', analytics:'/media/benefits_detail_bg.png'
