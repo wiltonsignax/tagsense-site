@@ -3,7 +3,7 @@ import { ArrowRight, BarChart3, Boxes, Layers3, Network, Radar, TrendingUp } fro
 import { type Locale } from '../content/site'
 import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'
+import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'
 
 export function InvestorsPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.investors
