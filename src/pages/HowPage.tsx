@@ -1,10 +1,10 @@
 import { useLocation } from 'react-router-dom'
 import { Activity, Cloud, Cpu, RadioTower } from 'lucide-react'
 import { type Locale } from '../content/site'
-import { getCopy } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
 import { PageHero } from '../components/PageHero'
-import { Architecture } from '../components/Architecture'
+import { Architecture } from '../components/Architecture'\nimport { FeatureBanner } from '../components/FeatureBanner'
 
 export function HowPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.how
@@ -28,7 +28,7 @@ export function HowPage({locale}:{locale:Locale}) {
     <SEO locale={locale} title={`${p.title} | TagSense`} description={p.subtitle} path={location.pathname}/>
     <PageHero eyebrow={c.nav.how.toUpperCase()} title={p.title} subtitle={p.subtitle} image="/media/arch_detail_bg.png"/>
     <section className="section"><div className="container"><div className="grid grid-4">{steps.map(s=><div className="card" key={s[0]}><div className="icon-box">{s[0]}</div><h3>{s[1]}</h3><p>{s[2]}</p></div>)}</div></div></section>
-    <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">EDGE + CLOUD</div><h2>{locale==='pt'?'Operação local contínua. Gestão centralizada.':locale==='en'?'Continuous local operation. Centralized management.':'Operación local continua. Gestión centralizada.'}</h2></div><p>{locale==='pt'?'O Edge mantém o processo crítico próximo ao leitor. A Cloud concentra gestão, auditoria e inteligência.':locale==='en'?'Edge keeps critical processing close to the reader. Cloud centralizes management, audit and intelligence.':'Edge mantiene el procesamiento crítico cerca del lector. Cloud centraliza gestión, auditoría e inteligencia.'}</p></div><Architecture locale={locale}/></div></section>
+    <FeatureBanner eyebrow="EDGE + CLOUD" title={locale==='pt'?'Decisão no milissegundo certo. Gestão no lugar certo.':locale==='en'?'Decision at the right millisecond. Management in the right place.':'Decisión en el milisegundo correcto. Gestión en el lugar correcto.'} body={locale==='pt'?'O Edge mantém a operação crítica próxima aos leitores, enquanto a Cloud concentra gestão, auditoria, analytics e sincronização.':locale==='en'?'Edge keeps critical operations close to readers while Cloud centralizes management, audit, analytics and synchronization.':'Edge mantiene la operación crítica cerca de los lectores mientras Cloud centraliza gestión, auditoría, analytics y sincronización.'} image="/media/arch_detail_bg.png" href={pathFor(locale,'technology')} cta={locale==='pt'?'Explorar tecnologia':locale==='en'?'Explore technology':'Explorar tecnología'} icon={Cpu} meta={['Edge','Cloud','Offline continuity']} reverse/>\n    <section className="section alt"><div className="container"><div className="section-head"><div><div className="eyebrow">EDGE + CLOUD</div><h2>{locale==='pt'?'Operação local contínua. Gestão centralizada.':locale==='en'?'Continuous local operation. Centralized management.':'Operación local continua. Gestión centralizada.'}</h2></div><p>{locale==='pt'?'O Edge mantém o processo crítico próximo ao leitor. A Cloud concentra gestão, auditoria e inteligência.':locale==='en'?'Edge keeps critical processing close to the reader. Cloud centralizes management, audit and intelligence.':'Edge mantiene el procesamiento crítico cerca del lector. Cloud centraliza gestión, auditoría e inteligencia.'}</p></div><Architecture locale={locale}/></div></section>
     <section className="section"><div className="container"><div className="grid grid-2">
       <div className="card"><div className="icon-box"><Cpu/></div><h3>TagSense Edge</h3><ul className="check-list"><li><Activity/>Cache local e estado da operação</li><li><RadioTower/>Motor RFID e regras locais</li><li><Activity/>Alertas mesmo com internet instável</li></ul></div>
       <div className="card"><div className="icon-box"><Cloud/></div><h3>TagSense Cloud</h3><ul className="check-list"><li><Activity/>Gestão centralizada</li><li><Activity/>Dashboards e analytics</li><li><Activity/>Auditoria, histórico e sincronização</li></ul></div>
