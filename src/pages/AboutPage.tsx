@@ -1,9 +1,9 @@
 import { useLocation } from 'react-router-dom'
 import { Crosshair, Eye, ShieldCheck } from 'lucide-react'
 import { type Locale } from '../content/site'
-import { getCopy } from '../lib/i18n'
+import { getCopy, pathFor } from '../lib/i18n'
 import { SEO } from '../components/SEO'
-import { PageHero } from '../components/PageHero'
+import { PageHero } from '../components/PageHero'\nimport { FeatureBanner } from '../components/FeatureBanner'
 
 export function AboutPage({locale}:{locale:Locale}) {
   const c=getCopy(locale); const location=useLocation(); const p=c.pages.about
